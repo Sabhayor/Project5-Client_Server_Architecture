@@ -1,0 +1,66 @@
+to start mysql service: sudo systemctl enable mysql
+
+to secure mysql server: sudo mysql_secure_installation
+
+Start the mysql client: sudo mysql
+
+IMPEDIMENT - Unable to run security script
+sudo mysql_secure_installation
+
+RESOLUTION - 
+1. Open the terminal application.
+2. Terminate the mysql_secure_installation from another terminal using the killall command:
+sudo killall -9 mysql_secure_installation
+3. Start the mysql client:
+sudo mysql
+4. Run the following SQL query:
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'SetRootPasswordHere';
+
+to create user:
+CREATE USER 'remote_user'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
+
+to create database:
+CREATE DATABASE test_db;
+
+to grant privileges:
+GRANT ALL ON test_db.* TO 'remote_user'@'%' WITH GRANT OPTION;
+
+next is to flush privileges 
+FLUSH PRIVILEDGES;
+
+NOTE: When you create a new database user or modify the privileges of an existing user, you may need to use the "FLUSH PRIVILEGES" command to ensure that the changes take effect immediately.
+
+
+NOTES FOR CLIENT-SERVER ARCHITECTURE WITH MYSQL
+Client-Server refers to an architecture in which two or more computers are connected together over a network to send and receive requests between one another.
+
+In their communication, each machine has its own role: the machine sending requests is usually referred as “Client” and the machine responding (serving) is called “Server”.
+
+A machine that is trying to access a Web site using Web browser or simply ‘curl’ command is a client and it sends HTTP requests to a Web server (Apache, Nginx, IIS or any other) over the Internet.
+
+curl command - Client URL (cURL, pronounced “curl”) is a command line tool that enables data exchange between a device and a server through a terminal.
+
+Example:
+curl https://toolkitapi.armpension.com:4434/sms-log-upload
+
+More on cURL
+https://blog.hubspot.com/website/curl-command#:~:text=Client%20URL%20(cURL%2C%20pronounced%20%E2%80%9C,send%20to%20that%20server%20URL.
+
+Ping:
+The "ping" command is used to test network connectivity between two devices. It sends Internet Control Message Protocol (ICMP) Echo Request messages to the destination IP address or domain name and waits for ICMP Echo Reply messages. The time taken for the messages to travel back and forth (round-trip time) is measured and displayed, along with other statistics. The "ping" command is primarily used to check if a host is reachable and to measure the network latency or response time.
+
+Example usage:
+ping www.example.com
+ping 192.168.1.1
+
+Tracert (Windows) or traceroute (Linux/macOS):
+The "tracert" command in Windows or "traceroute" in Linux/macOS is used to trace the path that packets take from the source device to a destination device on a network. It works by sending a series of Internet Control Message Protocol (ICMP) Echo Request messages with varying Time-To-Live (TTL) values. Each router encountered along the path decrements the TTL value, and if the TTL reaches zero, the router discards the packet and sends an ICMP Time Exceeded message back to the source. This way, the path is gradually determined by analyzing the IP addresses of the routers that send back ICMP Time Exceeded messages.
+
+Example usage:
+tracert www.example.com (Windows)
+traceroute www.example.com (Linux/macOS)
+
+
+
+
+
