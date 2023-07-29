@@ -1,3 +1,10 @@
+to install mysql
+sudo apt update
+sudo apt install mysql-client (to install mysql client)
+sudo apt install mysql-server (to install mysql server)
+
+
+
 to start mysql service: sudo systemctl enable mysql
 
 to secure mysql server: sudo mysql_secure_installation
@@ -31,6 +38,18 @@ FLUSH PRIVILEDGES;
 NOTE: When you create a new database user or modify the privileges of an existing user, you may need to use the "FLUSH PRIVILEGES" command to ensure that the changes take effect immediately.
 
 
+IMPEDIMENT: 
+Unable to launch mysql
+ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)
+
+RESOLUTION
+
+
+
+
+
+
+
 NOTES FOR CLIENT-SERVER ARCHITECTURE WITH MYSQL
 Client-Server refers to an architecture in which two or more computers are connected together over a network to send and receive requests between one another.
 
@@ -60,7 +79,9 @@ Example usage:
 tracert www.example.com (Windows)
 traceroute www.example.com (Linux/macOS)
 
+ip addr show - to show ip address
 
 
+https://github.com/Tonybesto/DevOps_Projects/blob/main/project-5/project5.md
 
 
