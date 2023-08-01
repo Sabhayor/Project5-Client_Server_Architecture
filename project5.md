@@ -15,6 +15,7 @@ Upgrade ubuntu - `sudo apt upgrade`
 
 Make sure to enable the MySQL.service after installing  
 `sudo systemctl enable mysql`
+`sudo systemctl status mysql`
 
 3. On mysql client Linux Server install MySQL Client software.  
 ![Install MySQL Client](/images/mysql-client-install.jpg)
@@ -24,6 +25,35 @@ Make sure to enable the MySQL.service after installing
 
 5. For MySQL secure installation use the following,  
 `sudo mysql_secure_installation`  
+6. Launch mysql server and create user and database
+    `sudo mysql`
+    ![mysql launch](/images/mysql-launch.jpg)
+    Create user:  
+    `CREATE USER 'remote_user'@'%' IDENTIFIED WITH mysql_native_password BY 'password';`  
+    Create database:  
+    `CREATE DATABASE test_db;`  
+    Grant all priviledges:  
+    `GRANT ALL ON test_db. * TO 'remote_user'@'%' WITH GRANT OPTION;`  
+    Flush priviledges:  
+    `FLUSH PRIVILEGES;`
+    ![mysql launch](/images/create_user_and_database.jpg)
+
+7. Exit MySQL and restart the mySQL service using  
+    `sudo systemctl restart mysql`  
+8. Configure MySQL server to allow connections from remote  hosts.  
+    `sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf`
+     ![Binding Address](/images/binding-address.jpg)
+9. From mysql client Linux Server connect remotely to mysql server Database Engine without using SSH. You must use the mysql utility to perform this action.  
+Check that you have successfully connected to a remote MySQL server and can perform SQL queries:  
+`sudo mysql -u remote_user -h 172.31.94.11`
+![Connecting to DB](/images/connect_to_db.jpg)
+
+Show database  
+![Show DB](/images/Show_DB.jpg)  
+
+If you see an output similar to the below image, then you have successfully completed this project – you have deloyed a fully functional MySQL Client-Server set up.
+
+Thank You!!
 
 
 
@@ -38,21 +68,5 @@ Make sure to enable the MySQL.service after installing
 
 
 
-Create and configure two Linux-based virtual servers (EC2 instances in AWS).
-
-On mysql server Linux Server install MySQL Server software.
-
-On mysql client Linux Server install MySQL Client software.
-
-Create a new entry in ‘Inbound rules’ in ‘mysql server’ Security Groups, MySQL server uses TCP port 3306 by default.
-
-You might need to configure MySQL server to allow connections from remote hosts.
-sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
-
-Replace ‘127.0.0.1’ to ‘0.0.0.0’ like this:
-
-From mysql client Linux Server connect remotely to mysql server Database
-Check that you have successfully connected to a remote MySQL server and can perform SQL queries
-Show databases;
 
 
